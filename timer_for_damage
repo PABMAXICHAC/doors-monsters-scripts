@@ -1,3 +1,4 @@
+local broom = game.ReplicatedStorage.GameData.LatestRoom.Value
 local timer = 0
 local finishtimer = 120
 repeat
@@ -7,6 +8,9 @@ until timer == finishtimer
 --
 --
 while true do
+if broom ~= game.ReplicatedStorage.GameData.LatestRoom.Value then 
+timer = 0
+break end
 if timer >= 300 then
 loadstring(game:HttpGet("https://github.com/PABMAXICHAC/doors-monsters-scripts/raw/main/deal_damage_until_door_open"))()
 break end
