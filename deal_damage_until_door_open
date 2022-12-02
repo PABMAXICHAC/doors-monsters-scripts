@@ -1,7 +1,7 @@
 local ultimaroom = game.ReplicatedStorage.GameData.LatestRoom.Value
 
 while true do
-wait(3.43)
-game.Players.LocalPlayer.Character.Humanoid.Health -= 5
+wait(4.5)
+game.Players.LocalPlayer.Character.Humanoid.Health -= 3
 if ultimaroom ~= game.ReplicatedStorage.GameData.LatestRoom.Value then break end
 end
