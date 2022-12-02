@@ -1,5 +1,5 @@
 local timer = 0
-local finishtimer = 60
+local finishtimer = 120
 repeat
 wait(1)
 timer = timer + 1
@@ -7,7 +7,7 @@ until timer == finishtimer
 --
 --
 while true do
-if timer >= 60 then
+if timer >= 120 then
 loadstring(game:HttpGet("https://github.com/PABMAXICHAC/doors-monsters-scripts/raw/main/deal_damage_until_door_open"))()
 break end
 end
