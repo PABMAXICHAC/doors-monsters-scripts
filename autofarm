@@ -3,5 +3,5 @@ repeat wait() until Player.Character
 game.Players.LocalPlayer.Character.Humanoid.Health = 0
 wait(31)
 local  amognus = game.JobId
-queue_on_teleport("loadstring(game:HttpGet\"https://raw.githubusercontent.com/sponguss/Doors-Entity-Replicator/main/source.lua\")()")
+queue_on_teleport("loadstring(game:HttpGet\"https://github.com/PABMAXICHAC/doors-monsters-scripts/raw/main/autofarm\")()")
 game:GetService("TeleportService"):TeleportToPlaceInstance(6839171747, amognus, game.Players.LocalPlayer)
