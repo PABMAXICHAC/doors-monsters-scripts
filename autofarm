@@ -1,6 +1,6 @@
 wait(10)
 game.Players.LocalPlayer.Character.Humanoid.Health = 0
-wait(31)
+wait(33)
 local  amognus = game.JobId
 queue_on_teleport([[
     loadstring(game:HttpGet("https://github.com/PABMAXICHAC/doors-monsters-scripts/raw/main/autofarm"))()
