@@ -226,7 +226,8 @@ local copyjobid = Servers:CreateButton({
 local rejoin = Servers:CreateButton({
 	Name = "Rejoin",
 	Callback = function()
-	game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId, game.Players.LocalPlayer)
+	local  amognus = game.JobId
+	game:GetService("TeleportService"):TeleportToPlaceInstance(6839171747, amognus, game.Players.LocalPlayer)
 	Rayfield:Notify({
                 Title = "SERVERS",
                 Content = "Rejoining...",
