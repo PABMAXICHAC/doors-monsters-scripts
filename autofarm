@@ -1,5 +1,4 @@
-local Player = game.Players.LocalPlayer
-repeat wait() until Player.Character
+wait(8)
 game.Players.LocalPlayer.Character.Humanoid.Health = 0
 wait(31)
 local  amognus = game.JobId
