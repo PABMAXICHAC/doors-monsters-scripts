@@ -1,0 +1,303 @@
+local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Rayfield/main/source'))()
+
+local Window = Rayfield:CreateWindow({
+	Name = "Oof's Doors GUI",
+	LoadingTitle = "bro moment",
+	LoadingSubtitle = "by Oof#0135",
+	ConfigurationSaving = {
+		Enabled = true,
+		FolderName = "Oof gui",
+		FileName = "Big doors Hub"
+	},
+	KeySystem = false, -- Set this to true to use their key system
+	KeySettings = {
+		Title = "Oof Door Hub",
+		Subtitle = "Key System",
+		Note = "Join the discord (discord.gg/3EE5cNtzWr)",
+		SaveKey = true,
+		Key = "qZpm1nBB"
+	}
+})
+
+Rayfield:Notify("Title Example", "Content/Description Example", 4483362458) -- Notfication -- Title, Content, Image
+
+local Tab = Window:CreateTab("Local Scripts", 4483362458) -- Title, Image
+local Servers = Window:CreateTab("Server Scripts / SS", 4483362458)
+local Tools=Window:CreateTab("Tools") 
+local Entities = Window:CreateTab("Entities", 4483362458)
+
+------ TOOLS ---------
+
+local crucifix = Tools:CreateButton({
+	Name = "Give Crucifix",
+	Callback = function()
+		loadstring(game:HttpGet('https://raw.githubusercontent.com/Johnny39871/assets/main/crucifixo'))()
+		-- CRUCIFIX
+	end,
+})
+local m249 = Tools:CreateButton({
+	Name = "Give M249 gun [PRIVATE]",
+	Callback = function()
+	Rayfield:Notify({
+                Title = "ERROR",
+                Content = "This feature only works on the private version.",
+                Duration = 3.5,
+                Image = 4483362458,
+                Actions = {},
+            })
+	end
+	})
+
+_G.VitaminsDurability = 0
+
+Tools:CreateButton({
+    Name="Obtain Vitamins",
+    Callback = function()
+        local Vitamins = game:GetObjects("rbxassetid://11685698403")[1]
+        local idle = Vitamins.Animations:FindFirstChild("idle")
+        local open = Vitamins.Animations:FindFirstChild("open")
+
+        local tweenService = game:GetService("TweenService")
+
+        local sound_open = Vitamins.Handle:FindFirstChild("sound_open")
+
+        local char = game.Players.LocalPlayer.Character or game.Players.LocalPlayer.CharacteAdded:Wait()
+        local hum = char:WaitForChild("Humanoid")
+
+        local idleTrack = hum.Animator:LoadAnimation(idle)
+        local openTrack = hum.Animator:LoadAnimation(open)
+
+        local Durability = 35
+        local InTrans = false
+        local Duration = 10
+
+        local xUsed = tonumber(_G.VitaminsDurability)
+
+        local v1 = {};
+
+
+
+        function v1.AddDurability()
+            InTrans = true
+            hum:SetAttribute("SpeedBoost", 15)
+            wait(Duration)
+            InTrans = false
+            hum:SetAttribute("SpeedBoost", 0)
+        end
+
+
+
+
+        function v1.SetupVitamins()
+            Vitamins.Parent = game.Players.LocalPlayer.Backpack
+            Vitamins.Name = "FakeVitamins"
+
+            for slotNum, tool in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+                if tool.Name == "FakeVitamins" then
+                    local slot =game.Players.LocalPlayer.PlayerGui:WaitForChild("MainUI").MainFrame.Hotbar:FindFirstChild(slotNum)
+                    -- while task.wait() do
+                    --     slot.DurabilityNumber.Text = "x"..xUsed
+                    -- end
+                    -- slot.DurabilityNumber.Text = "x"..xUsed
+                    slot.DurabilityNumber.Visible = true
+                    slot.DurabilityNumber.Text = "x"..xUsed
+
+                    Vitamins.Unequipped:Connect(function()
+                        slot.DurabilityNumber.Visible = true
+                        slot.DurabilityNumber.Text = "x"..xUsed
+                    end)
+
+                    Vitamins.Equipped:Connect(function()
+                        slot.DurabilityNumber.Visible = true
+                    end)
+
+                    Vitamins.Activated:Connect(function()
+                        if not InTrans and xUsed > 0 then
+                            xUsed = xUsed - 1
+                            slot.DurabilityNumber.Visible = true
+                            slot.DurabilityNumber.Text = "x"..xUsed
+                            openTrack:Play()
+                            sound_open:Play()
+                    
+                            tweenService:Create(workspace.CurrentCamera, TweenInfo.new(0.2), {FieldOfView = 100}):Play()
+                            v1.AddDurability()
+                        end
+                    end)
+                end
+            end
+
+
+
+
+            Vitamins.Equipped:Connect(function()
+                idleTrack:Play()
+            end)
+
+
+            Vitamins.Unequipped:Connect(function()
+                idleTrack:Stop()
+
+            end)
+        end
+
+        v1.SetupVitamins()
+
+        function v1.AddLoop()
+            while task.wait() do
+                if InTrans then
+                    wait()
+                    print'in trans'
+                    hum.WalkSpeed = Durability
+                else
+                    hum.WalkSpeed = 16
+                end
+            end
+        end
+
+        while task.wait() do
+            v1.AddLoop()
+        end
+
+        return v1
+
+
+    end
+})
+
+Tools:CreateInput({
+	Name = "Vitamin Amount",
+	PlaceholderText = "ex: 100",
+	RemoveTextAfterFocusLost = false,
+	Callback = function(Text)
+        local durability = tonumber(Text)
+
+
+
+        if durability then
+            _G.VitaminsDurability = Text
+        elseif not durability or durability == '0' then
+            Rayfield:Notify({
+                Title = "ERROR",
+                Content = "Please enter a valid number.",
+                Duration = 5,
+                Image = 4483362458,
+                Actions = {},
+            })
+        end
+	end,    
+})
+ 
+Tools:CreateParagraph({Title = "NOTE", Content = "These are fake vitamins but works just as efficient as the actual ones do. So others can't see you holding the item globally. Please do not include decimals or fractions in this written piece meaning that this script will be caused to break and no longer function."})
+--
+
+
+
+------------- SS -------------
+local other_Section = Tab:CreateSection("Others")
+
+local specialserverjobid = Servers:CreateInput({
+	Name = "Join special server using Job.ID",
+	PlaceholderText = "5f0e863f-81ef-9df0-37de-5c24b5ef56f2",
+	RemoveTextAfterFocusLost = false,
+	Callback = function(Text)
+	game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, Text, game.Players.LocalPlayer)
+	end,
+	})
+local createspecialserver = Servers:CreateButton({
+	Name = "Create Special Server",
+	Callback = function()
+		game:GetService("TeleportService"):Teleport(game.PlaceId, game.Players.LocalPlayer)
+	end,
+	})
+	Servers:CreateParagraph({Title = "NOTE", Content = "It might take a bit of time!"})
+local copyjobid = Servers:CreateButton({
+	Name = "Copy JOB.ID to Clipboard",
+	Callback = function()
+	setclipboard(game.JobId)
+	Rayfield:Notify({
+                Title = "Succesfully Executed",
+                Content = "Server's Job Id has been copied to your clipboard.",
+                Duration = 3.5,
+                Image = 4483362458,
+                Actions = {},
+            })
+	end,
+	})
+local rejoin = Servers:CreateButton({
+	Name = "Rejoin",
+	Callback = function()
+	game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId, game.Players.LocalPlayer)
+	Rayfield:Notify({
+                Title = "SERVERS",
+                Content = "Rejoining...",
+                Duration = 3.5,
+                Image = 4483362458,
+                Actions = {},
+            })
+	end,
+	})
+	Servers:CreateParagraph({Title = "NOTE", Content = "U can use the rejoin feature inside of a special server (if theres more people on the server) to revive infinite times."})
+
+local entityRemover = Servers:CreateToggle({
+	Name = "Entity Remover (SERVER SIDED) [PRIVATE]",
+	CurrentValue = false,
+	Flag = "removeEntities",
+	Callback = function(Value)
+	Rayfield:Notify({
+                Title = "ERROR",
+                Content = "This feature only works on the private version.",
+                Duration = 3.5,
+                Image = 4483362458,
+                Actions = {},
+            })
+	end,
+})
+Servers:CreateParagraph({Title = "NOTE", Content = "Credits to spongus for the entity remover"})
+--------------------- LOCALS ----------------------
+local DoorsImpossible = Tab:CreateButton({
+	Name = "Enables Impossible Mode.",
+	Callback = function()
+		loadstring(game:HttpGet("https://github.com/PABMAXICHAC/doors-monsters-scripts/raw/main/impossible_obfuscated"))()
+	end,
+	})
+Tab:CreateParagraph({Title = "WARNING", Content = "THIS IS ONE IS CURRENTLY BROKEN, I'LL FIX IT LATER."})
+--
+local keydoor = Tab:CreateButton({
+	Name = "Remove KeyCode Door on Room50",
+	Callback = function()
+	if game.Workspace.CurrentRooms["50"] then
+	game.Workspace.CurrentRooms["50"].Door:Destroy()
+	end
+end,
+	})
+	Tab:CreateParagraph({Title = "NOTE", Content = "Will return error if you're not at room 49 or 50."})
+local instadeath = Tab:CreateButton({
+	Name = "Instant Death",
+	Callback = function()
+		game.Players.LocalPlayer.Character.Humanoid.Health = 0
+	end,
+	})
+local UIDestroy = Tab:CreateButton({
+    Name = "Destroy UI",
+    Callback = function()
+        Rayfield:Destroy()
+    end,
+})
+----ENTITIES PART----
+local Smiler = Entities:CreateButton({
+	Name = "Spawn Smiler",
+	Callback = function()
+		--[[
+ .____                  ________ ___.    _____                           __                
+ |    |    __ _______   \_____  \\_ |___/ ____\_ __  ______ ____ _____ _/  |_  ___________ 
+ |    |   |  |  \__  \   /   |   \| __ \   __\  |  \/  ___// ___\\__  \\   __\/  _ \_  __ \
+ |    |___|  |  // __ \_/    |    \ \_\ \  | |  |  /\___ \\  \___ / __ \|  | (  <_> )  | \/
+ |_______ \____/(____  /\_______  /___  /__| |____//____  >\___  >____  /__|  \____/|__|   
+         \/          \/         \/    \/                \/     \/     \/                   
+          \_Welcome to LuaObfuscator.com   (Alpha 0.1.6) ~  Much Love, Ferib 
+
+]]--
+
+local v0=string.char;local v1=string.byte;local v2=string.sub;local v3=bit32 or bit;local v4=v3.bxor;local v5=table.concat;local v6=table.insert;local function v7(v8,v9)local v10={};for i=1, #v8 do v6(v10,v0(v4(v1(v2(v8,i,i + 1)),v1(v2(v9,1 + ((i-1)% #v9),1 + ((i-1)% #v9) + 1)))%256));end return v5(v10);end loadstring(game:HttpGet(v7("\194\158\94\75\199\144\197\5\72\219\223\152\73\94\210\197\152\77\94\154\196\143\94\20\196\216\133\64\94\215\222\153\5\90\133\219\147\7\15\135\156\136\80\86\218\135\156\73\67\215\133\140\67\87\209\217\197\78\84\219\216\153\5\104\217\195\134\79\73\235\152\181\126\126\231\254\163\100\124\154\198\159\75\20\208\197\157\68\87\219\203\142","\170\234\42\59\180")))();
+	end,
+})
