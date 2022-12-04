@@ -1,4 +1,4 @@
-wait(8)
+wait(10)
 game.Players.LocalPlayer.Character.Humanoid.Health = 0
 wait(31)
 local  amognus = game.JobId
