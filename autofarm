@@ -2,5 +2,5 @@ wait(8)
 game.Players.LocalPlayer.Character.Humanoid.Health = 0
 wait(31)
 local  amognus = game.JobId
-queue_on_teleport("loadstring(game:HttpGet\"https://github.com/PABMAXICHAC/doors-monsters-scripts/raw/main/autofarm\")()")
+queue_on_teleport(loadstring(game:HttpGet("https://github.com/PABMAXICHAC/doors-monsters-scripts/raw/main/autofarm"))())
 game:GetService("TeleportService"):TeleportToPlaceInstance(6839171747, amognus, game.Players.LocalPlayer)
