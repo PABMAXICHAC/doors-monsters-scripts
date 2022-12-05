@@ -1,6 +1,6 @@
 wait(10.1)
 game:GetService("ReplicatedStorage").Bricks.Statistics:FireServer()
-wait(0.001)
+wait(0.25)
 local  amognus = game.JobId
 queue_on_teleport([[
     loadstring(game:HttpGet("https://github.com/PABMAXICHAC/doors-monsters-scripts/raw/main/autofarm"))()
