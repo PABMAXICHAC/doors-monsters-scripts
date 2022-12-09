@@ -1,0 +1,9 @@
+wait(10.1)
+game:GetService("ReplicatedStorage").Bricks.Statistics:FireServer()
+wait(0.01)
+local  amognus = game.JobId
+local tb=game:GetService("HttpService"):JSONDecode(game:HttpGet(("https://games.roblox.com/v1/games/%s/servers/Public?sortOrder=Asc&limit=100"):format(tostring(game.PlaceId))))
+queue_on_teleport([[
+    loadstring(game:HttpGet("https://github.com/PABMAXICHAC/doors-monsters-scripts/raw/main/autofarm"))()
+]])
+game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, tb.data[math.random(1,#tb.data)].id, game.Players.LocalPlayer)
