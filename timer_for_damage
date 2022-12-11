@@ -9,7 +9,7 @@ print(timer)
         timer=0
         break 
 
-        elseif timer >= 5 then 
+        elseif timer >= 300 then 
         loadstring(game:HttpGet("https://github.com/PABMAXICHAC/doors-monsters-scripts/raw/main/deal_damage_until_door_open"))()
         timer = 0
         break
