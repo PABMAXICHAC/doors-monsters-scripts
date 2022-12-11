@@ -8,7 +8,7 @@ until timer == finishtimer
 --
 --
 while true do
-if broom ~= game.ReplicatedStorage.GameData.LatestRoom.Value then 
+if game.ReplicatedStorage.GameData.LatestRoom.Changed then 
 timer = 0
 break end
 if timer >= 300 then
