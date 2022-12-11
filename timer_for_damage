@@ -12,7 +12,9 @@ end
 --
 --
 while true do
+wailt(0.01)
 if timer >= 300 or == 300 then
+wait(0.1)
 loadstring(game:HttpGet("https://github.com/PABMAXICHAC/doors-monsters-scripts/raw/main/deal_damage_until_door_open"))()
 timer = 0
 break end
