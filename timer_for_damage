@@ -1,6 +1,6 @@
 local broom = game.ReplicatedStorage.GameData.LatestRoom.Value
 local timer = 0
-local finishtimer = 120
+local finishtimer = 301
 repeat
 wait(1)
 timer = timer + 1
