@@ -4,7 +4,6 @@ while true do
 
 wait(1)
 timer = timer + 1
-print(timer)
     if game.ReplicatedStorage.GameData.LatestRoom.Value ~= broom then 
         timer=0
         break 
