@@ -1,0 +1,21 @@
+local lastroom = game.ReplicatedStorage.GameData.LatestRoom.Value
+-- Find the parent object of the models
+local parent = game:GetService("Workspace").CurrentRooms[lastroom].Parts
+
+-- Get a list of all the child objects of the parent
+local children = parent:GetChildren()
+
+-- Create a list to store the selected models
+local selectedModels = {}
+
+-- Loop through the list of children and add the models with the name "Steps" to the selectedModels list
+for _, child in pairs(children) do
+  if child.Name == "Steps" then
+    table.insert(selectedModels, child)
+  end
+end
+
+-- Loop through the selected models and perform an action on each of them
+for i, model in pairs(selectedModels) do
+  model.Name = "Steps" .. i
+end
