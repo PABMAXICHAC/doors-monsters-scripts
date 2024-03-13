@@ -1,39 +1,563 @@
-firesignal(game.ReplicatedStorage.Bricks.Caption.OnClientEvent, "I")
-wait(.1)
-firesignal(game.ReplicatedStorage.Bricks.Caption.OnClientEvent, "I c")
-wait(.1)
-firesignal(game.ReplicatedStorage.Bricks.Caption.OnClientEvent, "I ca")
-wait(.1)
-firesignal(game.ReplicatedStorage.Bricks.Caption.OnClientEvent, "I can")
-wait(.1)
-firesignal(game.ReplicatedStorage.Bricks.Caption.OnClientEvent, "I can'")
-wait(.1)
-firesignal(game.ReplicatedStorage.Bricks.Caption.OnClientEvent, "I can't")
-wait(.1)
-firesignal(game.ReplicatedStorage.Bricks.Caption.OnClientEvent, "I can't b")
-wait(.1)
-firesignal(game.ReplicatedStorage.Bricks.Caption.OnClientEvent, "I can't be")
-wait(.1)
-firesignal(game.ReplicatedStorage.Bricks.Caption.OnClientEvent, "I can't bel")
-wait(.1)
-firesignal(game.ReplicatedStorage.Bricks.Caption.OnClientEvent, "I can't beli")
-wait(.1)
-firesignal(game.ReplicatedStorage.Bricks.Caption.OnClientEvent, "I can't belie")
-wait(.1)
-firesignal(game.ReplicatedStorage.Bricks.Caption.OnClientEvent, "I can't believ")
-wait(.1)
-firesignal(game.ReplicatedStorage.Bricks.Caption.OnClientEvent, "I can't believe")
-wait(.1)
-firesignal(game.ReplicatedStorage.Bricks.Caption.OnClientEvent, "I can't believe t")
-wait(.1)
-firesignal(game.ReplicatedStorage.Bricks.Caption.OnClientEvent, "I can't believe th")
-wait(.1)
-firesignal(game.ReplicatedStorage.Bricks.Caption.OnClientEvent, "I can't believe thi")
-wait(.1)
-firesignal(game.ReplicatedStorage.Bricks.Caption.OnClientEvent, "I can't believe this")
-wait(.1)
-firesignal(game.ReplicatedStorage.Bricks.Caption.OnClientEvent, "I can't believe this.")
-wait(.1)
-firesignal(game.ReplicatedStorage.Bricks.Caption.OnClientEvent, "I can't believe this..")
-wait(.1)
-firesignal(game.ReplicatedStorage.Bricks.Caption.OnClientEvent, "I can't believe this...")
+local debug_mode = true
+
+
+-- FOR DEVS? (sry my code is ass)
+--getgenv().white_rooms -- will return rooms
+--getgenv().blink_rooms -- will return rooms
+--getgenv().smiler_rooms -- will return rooms
+--
+require(game.Players.LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game).caption("Oof's Impossible Mode Rework script succesfully loaded. V0.1",true)
+game.TextChatService.TextChannels.RBXGeneral:DisplaySystemMessage("Oof's Impossible Mode Rework script succesfully loaded. V0.1")
+local Spawner = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors%20Entity%20Spawner/Source.lua"))()
+-----------------============ GUI STUFF =============-------------
+-- Instances:
+if not game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"):FindFirstChild("Glitchy") then
+	local Glitchy = Instance.new("ScreenGui")
+	local GlitchScreen = Instance.new("Frame")
+	local Glitch1 = Instance.new("ImageLabel")
+	local Glitch2 = Instance.new("ImageLabel")
+	local Glitch3 = Instance.new("ImageLabel")
+	
+	--Properties:
+	
+	Glitchy.Name = "Glitchy"
+	Glitchy.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+	Glitchy.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+	
+	GlitchScreen.Name = "Glitch Screen"
+	GlitchScreen.Parent = Glitchy
+	GlitchScreen.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	GlitchScreen.BackgroundTransparency = 1.000
+	GlitchScreen.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	GlitchScreen.BorderSizePixel = 0
+	GlitchScreen.Size = UDim2.new(1, 1, 1, 1)
+	
+	Glitch1.Name = "Glitch1"
+	Glitch1.Parent = GlitchScreen
+	Glitch1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Glitch1.BackgroundTransparency = 1.000
+	Glitch1.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Glitch1.BorderSizePixel = 0
+	Glitch1.Visible = false
+	Glitch1.Size = UDim2.new(1, 1, 1, 1)
+	Glitch1.Image = "rbxassetid://15959966417"
+	Glitch1.ImageTransparency = 0.800
+	
+	Glitch2.Name = "Glitch2"
+	Glitch2.Parent = GlitchScreen
+	Glitch2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Glitch2.BackgroundTransparency = 1.000
+	Glitch2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Glitch2.BorderSizePixel = 0
+	Glitch2.Visible = false
+	Glitch2.Size = UDim2.new(1, 1, 1, 1)
+	Glitch2.Image = "rbxassetid://15959979240"
+	Glitch2.ImageTransparency = 0.800
+	
+	Glitch3.Name = "Glitch3"
+	Glitch3.Parent = GlitchScreen
+	Glitch3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Glitch3.BackgroundTransparency = 1.000
+	Glitch3.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Glitch3.BorderSizePixel = 0
+	Glitch3.Visible = false
+	Glitch3.Size = UDim2.new(1, 1, 1, 1)
+	Glitch3.Image = "rbxassetid://12590547162"
+	Glitch3.ImageTransparency = 0.800
+end
+
+
+------------========== ENTITIES ==========-------------
+-------------- SMILER HERE ---------------
+local SmilerSpawn = Spawner.createEntity({
+    CustomName = "Smiler", -- Custom name of your entity
+    Model = "16734826391", -- Can be GitHub file or rbxassetid
+    Speed = 500, -- Percentage, 100 = default Rush speed
+    DelayTime = 12, -- Time before starting cycles (seconds)
+    HeightOffset = 0,
+    CanKill = true,
+    KillRange = 50,
+    BackwardsMovement = false,
+    BreakLights = true,
+    FlickerLights = {
+        true, -- Enabled/Disabled
+        10, -- Time (seconds)
+    },
+    Cycles = {
+        Min = 10,
+        Max = 10,
+        WaitTime = 0.5,
+    },
+    CamShake = {
+        true, -- Enabled/Disabled
+        {3.5, 20, 0.1, 1}, -- Shake values (don't change if you don't know)
+        100, -- Shake start distance (from Entity to you)
+    },
+    Jumpscare = {
+        true, -- Enabled/Disabled
+        {
+            Image1 = "rbxassetid://11417375410", -- Image1 url
+            Image2 = "rbxassetid://11417375410", -- Image2 url
+            Shake = true,
+            Sound1 = {
+                10483790459, -- SoundId
+                { Volume = 0.5 }, -- Sound properties
+            },
+            Sound2 = {
+                10483837590, -- SoundId
+                { Volume = 0.5 }, -- Sound properties
+            },
+            Flashing = {
+                true, -- Enabled/Disabled
+                Color3.fromRGB(255, 0, 0), -- Color
+            },
+            Tease = {
+                false, -- Enabled/Disabled
+                Min = 1,
+                Max = 3,
+            },
+        },
+    },
+    CustomDialog = {"hi"}, -- Custom death message
+})
+
+
+-----[[  Debug -=- Advanced  ]]-----
+SmilerSpawn.Debug.OnEntitySpawned = function()
+    print("smiling")
+end
+
+SmilerSpawn.Debug.OnEntityDespawned = function()
+end
+
+SmilerSpawn.Debug.OnEntityStartMoving = function()
+end
+
+SmilerSpawn.Debug.OnEntityFinishedRebound = function()
+game.Lighting.Ambient = Color3.fromRGB(255,0,0)
+game:GetService("TweenService"):Create(game.Lighting, TweenInfo.new(1.5), {Ambient = Color3.fromRGB(67, 51, 56)}):Play()
+end
+
+SmilerSpawn.Debug.OnEntityEnteredRoom = function(room)
+end
+
+SmilerSpawn.Debug.OnLookAtEntity = function()
+end
+
+SmilerSpawn.Debug.OnDeath = function()
+end
+------------------------------------
+-------------- WHITE HERE ----------------
+local whiteSpawn = Spawner.createEntity({
+    CustomName = "WH1T3", -- Custom name of your entity
+    Model = "16735149732", -- Can be GitHub file or rbxassetid
+    Speed = 200, -- Percentage, 100 = default Rush speed
+    DelayTime = .5, -- Time before starting cycles (seconds)
+    HeightOffset = 0,
+    CanKill = true,
+    KillRange = 50,
+    BackwardsMovement = false,
+    BreakLights = true,
+    FlickerLights = {
+        false, -- Enabled/Disabled
+        1, -- Time (seconds)
+    },
+    Cycles = {
+        Min = 3,
+        Max = 3,
+        WaitTime = 0,
+    },
+    CamShake = {
+        true, -- Enabled/Disabled
+        {3.5, 20, 0.1, 1}, -- Shake values (don't change if you don't know)
+        100, -- Shake start distance (from Entity to you)
+    },
+    Jumpscare = {
+        false, -- Enabled/Disabled
+        {
+            Image1 = "rbxassetid://10483855823", -- Image1 url
+            Image2 = "rbxassetid://10483999903", -- Image2 url
+            Shake = true,
+            Sound1 = {
+                10483790459, -- SoundId
+                { Volume = 0.5 }, -- Sound properties
+            },
+            Sound2 = {
+                10483837590, -- SoundId
+                { Volume = 0.5 }, -- Sound properties
+            },
+            Flashing = {
+                true, -- Enabled/Disabled
+                Color3.fromRGB(255, 255, 255), -- Color
+            },
+            Tease = {
+                true, -- Enabled/Disabled
+                Min = 1,
+                Max = 3,
+            },
+        },
+    },
+    CustomDialog = {"You feel like the game is glitching.", "Maybe try not to look at him next time."}, -- Custom death message
+})
+
+
+-----[[  Debug -=- Advanced  ]]-----
+whiteSpawn.Debug.OnEntitySpawned = function()
+    --print("Entity has spawned:", entityTable)
+end
+
+whiteSpawn.Debug.OnEntityDespawned = function()
+    local Gglitchy = game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"):FindFirstChild("Glitchy")
+    local Gglitch1 = Gglitchy["Glitch Screen"].Glitch1
+    local Gglitch2 = Gglitchy["Glitch Screen"].Glitch2
+    local Gglitch3 = Gglitchy["Glitch Screen"].Glitch3
+    Gglitch1.Visible = false
+    Gglitch2.Visible = false
+    Gglitch3.Visible = false
+end
+
+whiteSpawn.Debug.OnEntityStartMoving = function()
+end
+
+whiteSpawn.Debug.OnEntityFinishedRebound = function()
+end
+
+whiteSpawn.Debug.OnEntityEnteredRoom = function(room)
+    --print("Entity:", entityTable, "has entered room:", room)
+end
+
+whiteSpawn.Debug.OnLookAtEntity = function()
+    if game.Players.LocalPlayer.Character.Humanoid.Health > 2.6 then
+        game.Players.LocalPlayer.Character.Humanoid.Health -= 2.5
+        if game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"):FindFirstChild("Glitchy") then
+    local Gglitchy = game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"):FindFirstChild("Glitchy")
+    local Gglitch1 = Gglitchy["Glitch Screen"].Glitch1
+    local Gglitch2 = Gglitchy["Glitch Screen"].Glitch2
+    local Gglitch3 = Gglitchy["Glitch Screen"].Glitch3
+            if Gglitch1.Visible == false and Gglitch2.Visible == false and Gglitch3.Visible == false then
+    	    	Gglitch1.Visible = true
+                Gglitch1.ImageTransparency = 0.8
+                game:GetService("TweenService"):Create(Gglitch1, TweenInfo.new(1.5), {ImageTransparency = 1}):Play()
+        	end
+        	if Gglitch1.Visible == true and Gglitch2.Visible == false then
+        		Gglitch2.Visible = true
+                Gglitch2.ImageTransparency = 0.8
+                game:GetService("TweenService"):Create(Gglitch2, TweenInfo.new(1.5), {ImageTransparency = 1}):Play()
+        		Gglitch1.Visible = false
+        	elseif Gglitch2.Visible == true and Gglitch3.Visible == false then
+        		Gglitch3.Visible = true
+                Gglitch3.ImageTransparency = 0.8
+                game:GetService("TweenService"):Create(Gglitch3, TweenInfo.new(1.5), {ImageTransparency = 1}):Play()
+        		Gglitch2.Visible = false
+        	elseif Gglitch3.Visible == true and Gglitch1.Visible == false then
+        		Gglitch1.Visible = true
+                Gglitch1.ImageTransparency = 0.8
+                game:GetService("TweenService"):Create(Gglitch1, TweenInfo.new(1.5), {ImageTransparency = 1}):Play()
+        		Gglitch3.Visible = false
+        	end
+    end
+    end
+end
+
+whiteSpawn.Debug.OnDeath = function()
+    print("Plr Died")
+    local Gglitchy = game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"):FindFirstChild("Glitchy")
+    local Gglitch1 = Gglitchy["Glitch Screen"].Glitch1
+    local Gglitch2 = Gglitchy["Glitch Screen"].Glitch2
+    local Gglitch3 = Gglitchy["Glitch Screen"].Glitch3
+    Gglitch1.Visible = false
+    Gglitch2.Visible = false
+    Gglitch3.Visible = false
+    game.ReplicatedStorage.GameStats["Player_".. game.Players.LocalPlayer.Name].Total.DeathCause.Value = "WH1T3"
+    task.spawn(function()
+    print("Loading Task func...")
+        task.wait(15)
+        if game.Players.LocalPlayer.Character.Humanoid.Health <= 0 then
+        print("Plr is Dead")
+            game:Shutdown()
+        elseif game.Players.LocalPlayer.Character.Humanoid.Health > 0 then
+        print("Plr isn't dead")
+			local Debuffs = Instance.new("ScreenGui")
+			local WH1T3 = Instance.new("Frame")
+			local UICorner = Instance.new("UICorner")
+			local ImageLabel = Instance.new("ImageLabel")
+			local Speed_Debuff = Instance.new("TextLabel")
+			Debuffs.Name = "Debuffs"
+			Debuffs.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+			Debuffs.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+			WH1T3.Name = "WH1T3"
+			WH1T3.Parent = Debuffs
+			WH1T3.BackgroundColor3 = Color3.fromRGB(90, 43, 43)
+			WH1T3.BackgroundTransparency = 0.500
+			WH1T3.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			WH1T3.BorderSizePixel = 0
+			WH1T3.Position = UDim2.new(0.830811501, -1, 0.936082482, -1)
+			WH1T3.Size = UDim2.new(0.169188485, 1, 0.0639175251, 1)
+			UICorner.Parent = WH1T3
+			ImageLabel.Parent = WH1T3
+			ImageLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			ImageLabel.BackgroundTransparency = 1.000
+			ImageLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			ImageLabel.BorderSizePixel = 0
+			ImageLabel.Position = UDim2.new(4.92218874e-07, 0, 0, 0)
+			ImageLabel.Size = UDim2.new(0.266129375, 1, 1, 1)
+			ImageLabel.Image = "rbxassetid://12096064117"
+			Speed_Debuff.Name = "Speed_Debuff"
+			Speed_Debuff.Parent = WH1T3
+			Speed_Debuff.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			Speed_Debuff.BackgroundTransparency = 1.000
+			Speed_Debuff.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			Speed_Debuff.BorderSizePixel = 0
+			Speed_Debuff.Size = UDim2.new(1, 1, 1, 1)
+			Speed_Debuff.Font = Enum.Font.Unknown
+			Speed_Debuff.Text = "    -25% Speed"
+			Speed_Debuff.TextColor3 = Color3.fromRGB(99, 83, 45)
+			Speed_Debuff.TextSize = 14.000
+			Speed_Debuff.TextStrokeTransparency = 0.000
+            game.Players.LocalPlayer.Character.Humanoid:GetPropertyChangedSignal("WalkSpeed"):Connect(function()
+                game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 11.25
+            end)
+        end
+    end)
+end
+-- hi hello hi
+--Spawner.runEntity(whiteSpawn)
+-- oof says hello to you uwu:3
+local SpawnBlink = function()
+    local SelfModules = {
+    DefaultConfig = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors%20Entity%20Spawner/DefaultConfig.lua"))(),
+    Functions = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Functions.lua"))(),
+    }
+    local LastRoom = game:GetService("ReplicatedStorage").GameData.LatestRoom
+    local Room = game:GetService("Workspace").CurrentRooms:FindFirstChild(LastRoom.Value)
+    local Floor = Room:WaitForChild("Parts").Floor
+
+    local BlinkModel = game:GetObjects("rbxassetid://16735151241")[1]
+    if typeof(BlinkModel) == "Instance" and BlinkModel.ClassName == "Model" then
+        BlinkModel.PrimaryPart = BlinkModel.PrimaryPart or BlinkModel:FindFirstChildWhichIsA("BasePart")
+        BlinkModel.Parent = game.Workspace
+        BlinkModel.Name = "Blink"
+        BlinkModel.PrimaryPart.Position = Floor.Position + Vector3.new(0, 5, 0)
+        task.spawn(function()
+            game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+            BlinkModel:Destroy()
+        end)
+        local OpenEye = BlinkModel.Blink.OpenParticle
+        local ClosedEye = BlinkModel.Blink.ClosedParticle
+        local SwitchEye = function()
+            if OpenEye.Enabled == true then
+                OpenEye.Enabled = false
+                ClosedEye.Enabled = true
+                BlinkModel.Blink.Blink:Play()
+            elseif ClosedEye.Enabled == true then
+                ClosedEye.Enabled = false
+                OpenEye.Enabled = true
+                BlinkModel.Blink.Blink:Play()
+            end
+        end
+        task.spawn(function()
+            while true do
+                if not game:GetService("Workspace"):FindFirstChild("Blink") then break end
+                wait(math.random(1, 15))
+                SwitchEye()
+            end
+        end)
+        task.spawn(function()
+            while true do
+            wait()
+                if not game:GetService("Workspace"):FindFirstChild("Blink") then break end
+                if OpenEye.Enabled == true then
+                    if game.Players.LocalPlayer.Character.Humanoid.MoveDirection.Magnitude > 0 then
+                        game.Players.LocalPlayer.Character.Humanoid.Health -= 10
+                        game.ReplicatedStorage.GameStats["Player_".. game.Players.LocalPlayer.Name].Total.DeathCause.Value = "Blink"
+                        if game.Players.LocalPlayer.Character.Humanoid.Health <= 0 then
+                            BlinkModel.Blink.Kill:Play()
+                            game.ReplicatedStorage.GameStats["Player_".. game.Players.LocalPlayer.Name].Total.DeathCause.Value = "Blink"
+                            break
+                        end
+                        wait(1.5)
+                    end
+                end
+            end
+        end)
+    end
+end
+
+local WhiteSpawnFunc = function()
+    task.spawn(function()
+        task.wait(8)
+        Spawner.runEntity(whiteSpawn)
+    end)
+	local SpawnSound = Instance.new("Sound", game.Players.LocalPlayer.Character.Head)
+	SpawnSound.SoundId = "rbxassetid://9043345732"
+	SpawnSound.Volume = 1
+	SpawnSound:Play()
+	SpawnSound.Ended:Connect(function()
+		SpawnSound:Destroy()
+	end)
+	local DoF = Instance.new("DepthOfFieldEffect", game.Lighting)
+	DoF.Name = "White Depth of Field"
+	DoF.Enabled = true
+	DoF.FarIntensity = 1
+	DoF.FocusDistance = 1
+	DoF.NearIntensity = 0
+	DoF.InFocusRadius = 0
+	game.Lighting.Ambient = Color3.fromRGB(255,0,0)
+	game:GetService("TweenService"):Create(game.Lighting, TweenInfo.new(20), {Ambient = Color3.fromRGB(67, 51, 56)}):Play()
+	local DoFT = game:GetService("TweenService"):Create(DoF, TweenInfo.new(12), {FocusDistance = 50})
+	DoFT:Play()
+	DoFT.Completed:Connect(function()
+		DoF:Destroy()
+	end)
+end
+
+
+-- SPAWN FUNCTIONS HERE
+--WhiteSpawnFunc()
+--SpawnBlink()
+--Spawner.runEntity(SmilerSpawn)
+
+local ServerID = game.JobId
+local Seed = string.gsub(ServerID, "%D", "")
+local Gen = Random.new(Seed)
+local mathrandom = function(min, max)
+	return Gen:NextInteger(min, max)
+end
+
+local spawn_amount_blink = math.floor(mathrandom(10000,55000) / 10000) -- Can spawn up to 5 per game
+local spawn_amount_white = math.floor(mathrandom(100000,550000) / 100000) -- Can spawn up to 5 per game
+local spawn_amount_smiler = math.floor(mathrandom(1000000,5500000) / 1000000) -- Can spawn up to 5 per game
+--DEBUG--
+if debug_mode == true then
+	print("---DEBUG---")
+	print("Blink will spawn "..spawn_amount_blink.." times through the game.")
+	print("White will spawn "..spawn_amount_white.." times through the game.")
+	print("Smiler will spawn "..spawn_amount_smiler.." times through the game.")
+	print("---DEBUG---")
+end
+
+if spawn_amount_white == 1 then 
+	getgenv().white_rooms = {
+	mathrandom(1, 100),
+	}
+elseif spawn_amount_white == 2 then 
+	getgenv().white_rooms = {
+	mathrandom(1, 100),
+	math.floor(mathrandom(10, 1000) / 10),
+	}
+elseif spawn_amount_white == 3 then 
+	getgenv().white_rooms = {
+	mathrandom(1, 100),
+	math.floor(mathrandom(10, 1000) / 10),
+	math.floor(mathrandom(100, 10000) / 100),
+	}
+elseif spawn_amount_white == 4 then 
+	getgenv().white_rooms = {
+	mathrandom(1, 100),
+	math.floor(mathrandom(10, 1000) / 10),
+	math.floor(mathrandom(100, 10000) / 100),
+	math.floor(mathrandom(1000, 100000) / 1000),
+	}
+elseif spawn_amount_white == 5 then 
+	getgenv().white_rooms = {
+	mathrandom(1, 100),
+	math.floor(mathrandom(10, 1000) / 10),
+	math.floor(mathrandom(100, 10000) / 100),
+	math.floor(mathrandom(1000, 100000) / 1000),
+	math.floor(mathrandom(10000, 1000000) / 10000),
+	}
+end
+if spawn_amount_smiler == 1 then 
+	getgenv().smiler_rooms = {
+	mathrandom(1, 100),
+	}
+elseif spawn_amount_smiler == 2 then 
+	getgenv().smiler_rooms = {
+	mathrandom(1, 100),
+	math.floor(mathrandom(10, 1000) / 10),
+	}
+elseif spawn_amount_smiler == 3 then 
+	getgenv().smiler_rooms = {
+	mathrandom(1, 100),
+	math.floor(mathrandom(10, 1000) / 10),
+	math.floor(mathrandom(100, 10000) / 100),
+	}
+elseif spawn_amount_smiler == 4 then 
+	getgenv().smiler_rooms = {
+	mathrandom(1, 100),
+	math.floor(mathrandom(10, 1000) / 10),
+	math.floor(mathrandom(100, 10000) / 100),
+	math.floor(mathrandom(1000, 100000) / 1000),
+	}
+elseif spawn_amount_smiler == 5 then 
+	getgenv().smiler_rooms = {
+	mathrandom(1, 100),
+	math.floor(mathrandom(10, 1000) / 10),
+	math.floor(mathrandom(100, 10000) / 100),
+	math.floor(mathrandom(1000, 100000) / 1000),
+	math.floor(mathrandom(10000, 1000000) / 10000),
+	}
+end
+if spawn_amount_blink == 1 then 
+	getgenv().blink_rooms = {
+	mathrandom(1, 100),
+	}
+elseif spawn_amount_blink == 2 then 
+	getgenv().blink_rooms = {
+	mathrandom(1, 100),
+	math.floor(mathrandom(10, 1000) / 10),
+	}
+elseif spawn_amount_blink == 3 then 
+	getgenv().blink_rooms = {
+	mathrandom(1, 100),
+	math.floor(mathrandom(10, 1000) / 10),
+	math.floor(mathrandom(100, 10000) / 100),
+	}
+elseif spawn_amount_blink == 4 then 
+	getgenv().blink_rooms = {
+	mathrandom(1, 100),
+	math.floor(mathrandom(10, 1000) / 10),
+	math.floor(mathrandom(100, 10000) / 100),
+	math.floor(mathrandom(1000, 100000) / 1000),
+	}
+elseif spawn_amount_blink == 5 then 
+	getgenv().blink_rooms = {
+	mathrandom(1, 100),
+	math.floor(mathrandom(10, 1000) / 10),
+	math.floor(mathrandom(100, 10000) / 100),
+	math.floor(mathrandom(1000, 100000) / 1000),
+	math.floor(mathrandom(10000, 1000000) / 10000),
+	}
+end
+
+
+--make the entities spawn
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Connect(function()
+	--SPAWN WHITE
+	if table.find(getgenv().white_rooms, game.ReplicatedStorage.GameData.LatestRoom.Value) then
+		task.spawn(function()
+			WhiteSpawnFunc()
+		end)
+	end
+	--SPAWN BLINK
+	if table.find(getgenv().blink_rooms, game.ReplicatedStorage.GameData.LatestRoom.Value) then
+		task.spawn(function()
+			SpawnBlink()
+		end)
+	end
+	--SPAWN SMILER
+	if table.find(getgenv().smiler_rooms, game.ReplicatedStorage.GameData.LatestRoom.Value) then
+		task.spawn(function()
+			Spawner.runEntity(SmilerSpawn)
+		end)
+	end
+end)
+
+if debug_mode == true then
+	print("Blink Rooms")
+	table.foreach(getgenv().blink_rooms, print)
+	print("White Rooms")
+	table.foreach(getgenv().white_rooms, print)
+	print("Smiler Rooms")
+	table.foreach(getgenv().smiler_rooms, print)
+end
