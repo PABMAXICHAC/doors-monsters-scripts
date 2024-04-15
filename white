@@ -9,7 +9,7 @@ local entityHandler = require(Game.entityHandler)
 
 local Config = {
 	Model = game.InsertService:LoadAsset(17154124755),
-	Name = "weid",
+	Name = "white",
 	Speed = 100,
 	DelayTime = 2,
 	Damage = 100,
